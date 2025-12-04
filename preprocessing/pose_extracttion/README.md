@@ -1,0 +1,1 @@
+After running the extract_pose_phoenix.py file the embeddings will be extracted and placed in a folder called phoenix_pose_features within this directory
