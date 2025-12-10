@@ -9,8 +9,9 @@ import glob
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 
-VIDEO_ROOT = r"data\videos_phoenix\train"  
-OUTPUT_ROOT = r"pose_extraction\phoenix_pose_features"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+VIDEO_ROOT = os.path.join(BASE_DIR, "..", "..", "data", "videos_phoenix", "train")
+OUTPUT_ROOT = os.path.join(BASE_DIR, "phoenix_pose_features_train")
 os.makedirs(OUTPUT_ROOT, exist_ok=True)
 
 
