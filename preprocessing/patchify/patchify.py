@@ -118,7 +118,7 @@ def process_dataset(video_dir, save_dir,split,patch_size=16, out_size=224):
 
 if __name__ == "__main__":
     base_dir=os.path.dirname(os.path.abspath(__file__))
-    phoenix_root=os.path.abspath(os.path.join(base_dir, "..", "..", "Datasets", "videos_phoenix"))
+    phoenix_root=os.path.abspath(os.path.join(base_dir, "..", "..", "data", "videos_phoenix"))
 
     splits = ["train", "dev", "test"]
 
