@@ -8,6 +8,7 @@ import os
 import glob
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
+import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 VIDEO_ROOT = os.path.join(BASE_DIR, "..", "..", "data", "videos_phoenix", "train")
