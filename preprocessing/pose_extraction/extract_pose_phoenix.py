@@ -12,8 +12,9 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 VIDEO_ROOT = os.path.join(BASE_DIR, "..", "..", "data", "videos_phoenix", "train")
-OUTPUT_ROOT = os.path.join(BASE_DIR, "phoenix_pose_features_train")
-os.makedirs(OUTPUT_ROOT, exist_ok=True)
+SUBSETS=['train','dev','test']
+POSE_FEATURE_DIR=os.path.join(BASE_DIR, "pose_features")
+os.makedirs(POSE_FEATURE_DIR, exist_ok=True)
 
 
 #Extract landmarks
@@ -63,12 +64,18 @@ def process_video(video_path):
 
 
 if __name__ == "__main__":
-    all_videos = glob.glob(os.path.join(VIDEO_ROOT, "**/*.mp4"), recursive=True)
-    print(f"Found {len(all_videos)} videos.")
+    for subset in SUBSETS:
+        print(f"Starting extraction for subset: {subset}")
+        VIDEO_ROOT=os.path.join(BASE_DIR,subset)
+        OUTPUT_ROOT=os.path.join(POSE_FEATURE_DIR, subset)
+        os.makedirs(OUTPUT_ROOT, exist_ok=True)
 
+        all_videos = glob.glob(os.path.join(VIDEO_ROOT, "**/*.mp4"), recursive=True)
+        print(f"Found {len(all_videos)} videos.")
+        total_videos+=len(all_videos)
     # Parallel processing
-    with Pool(processes=cpu_count()) as pool:
-        for result in tqdm(pool.imap_unordered(process_video, all_videos), total=len(all_videos)):
-            print(result)
+        with Pool(processes=cpu_count()) as pool:
+            for result in tqdm(pool.imap_unordered(process_video, all_videos), total=len(all_videos)):
+                print(result)
     
     print("Extraction complete, All poses stored in:", OUTPUT_ROOT)
